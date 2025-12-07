@@ -1,5 +1,3 @@
- // =====================
-// PARTE DO HUGO
 // Clientes + Funcionarios + Datas + Utilitarios
 // =====================
 
