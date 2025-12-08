@@ -1,34 +1,16 @@
-// Clientes + Funcionarios + Datas + Utilitarios
-// =====================
+#include "hotel.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+char *strcasestr_local(const char *h, const char *n) {
+    if (!*n) return (char*)h;
+    for (; *h; h++) {
+        const char *hh = h, *nn = n;
+        while (*hh && *nn && tolower((unsigned char)*hh) == tolower((unsigned char)*nn)) { hh++; nn++; }
+        if (!*nn) return (char*)h;
+    }
+    return NULL;
+}
 
-#define STR_MAX 100
-
-/* ---------- Structs ---------- */
-typedef struct {
-    int dia, mes, ano;
-} Data;
-
-typedef struct {
-    int codigo;
-    char nome[STR_MAX];
-    char endereco[STR_MAX];
-    char telefone[30];
-} Cliente;
-
-typedef struct {
-    int codigo;
-    char nome[STR_MAX];
-    char telefone[30];
-    char cargo[40];
-    double salario;
-} Funcionario;
-
-/* ---------- Datas ---------- */
+// Data
 long data_para_jdn(Data d) {
     int a = (14 - d.mes) / 12;
     int y = d.ano + 4800 - a;
@@ -42,22 +24,7 @@ int diff_diarias(Data entrada, Data saida) {
     return (int)(j2 - j1);
 }
 
-/* ---------- Arquivos ---------- */
-#define ARQ_CLIENTES "clientes.dat"
-#define ARQ_FUNC "funcionarios.dat"
-
-/* ---------- Busca sem case ---------- */
-char *strcasestr_local(const char *h, const char *n) {
-    if (!*n) return (char*)h;
-    for (; *h; h++) {
-        const char *hh = h, *nn = n;
-        while (*hh && *nn && tolower((unsigned char)*hh) == tolower((unsigned char)*nn)) { hh++; nn++; }
-        if (!*nn) return (char*)h;
-    }
-    return NULL;
-}
-
-/* ---------- CLIENTES ---------- */
+// Parte dos clientes
 static int proximo_codigo_cliente() {
     FILE *f = fopen(ARQ_CLIENTES, "rb");
     int max = 0;
@@ -99,15 +66,17 @@ Cliente* buscar_cliente_por_nome(const char *nome) {
 
 void listar_clientes() {
     FILE *f = fopen(ARQ_CLIENTES, "rb");
-    if (!f) return;
+    if (!f) { printf("Nenhum cliente cadastrado.\n"); return; }
     Cliente c;
+    printf("\n--- LISTA DE CLIENTES ---\n");
     while (fread(&c, sizeof(Cliente), 1, f)) {
-        printf("%d - %s\n", c.codigo, c.nome);
+        printf("Codigo: %d - Nome: %s - Tel: %s\n", c.codigo, c.nome, c.telefone);
     }
+    printf("-------------------------\n");
     fclose(f);
 }
 
-/* ---------- FUNCIONARIOS ---------- */
+// Parte dos funcionï¿½rios
 static int proximo_codigo_func() {
     FILE *f = fopen(ARQ_FUNC, "rb");
     int max = 0;
@@ -149,12 +118,12 @@ Funcionario* buscar_funcionario_por_nome(const char *nome) {
 
 void listar_funcionarios() {
     FILE *f = fopen(ARQ_FUNC, "rb");
-    if (!f) return;
+    if (!f) { printf("Nenhum funcionario cadastrado.\n"); return; }
     Funcionario p;
+    printf("\n--- LISTA DE FUNCIONARIOS ---\n");
     while (fread(&p, sizeof(Funcionario), 1, f)) {
-        printf("%d - %s - %s\n", p.codigo, p.nome, p.cargo);
+        printf("Codigo: %d - Nome: %s - Cargo: %s - Salario: R$ %.2f\n", p.codigo, p.nome, p.cargo, p.salario);
     }
+    printf("-----------------------------\n");
     fclose(f);
 }
-
-// teste de atualiza‡Æo 
