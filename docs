@@ -1,0 +1,142 @@
+Projeto Clínica Médica - Guia Detalhado
+Este material apresenta uma implementação educacional completa da estrutura do projeto:
+pacotes, classes, exceções, repositório genérico, menu, interfaces funcionais e Git.
+Estrutura de Pastas
+src
+■■■ model
+■ ■■■ Consulta.java
+■ ■■■ Especialidade.java
+■■■ repository
+■ ■■■ Repositorio.java
+■■■ exception
+■ ■■■ ConsultaNaoEncontradaException.java
+■ ■■■ HorarioIndisponivelException.java
+■■■ service
+■ ■■■ ConsultaService.java
+■■■ main
+■■■ Main.java
+Especialidade.java
+package model;
+public enum Especialidade {
+CARDIOLOGIA,
+PEDIATRIA,
+ORTOPEDIA,
+DERMATOLOGIA
+}
+Consulta.java
+package model;
+import java.time.LocalDateTime;
+public class Consulta {
+private int codigo;
+private String nomePaciente;
+private Especialidade especialidade;
+private LocalDateTime dataConsulta;
+private double valorConsulta;
+public Consulta(int codigo, String nomePaciente,
+Especialidade especialidade,
+LocalDateTime dataConsulta,
+double valorConsulta) {
+this.codigo = codigo;
+this.nomePaciente = nomePaciente;
+this.especialidade = especialidade;
+this.dataConsulta = dataConsulta;
+this.valorConsulta = valorConsulta;
+}
+public int getCodigo() { return codigo; }
+public String getNomePaciente() { return nomePaciente; }
+public Especialidade getEspecialidade() { return especialidade; }
+public LocalDateTime getDataConsulta() { return dataConsulta; }
+public double getValorConsulta() { return valorConsulta; }
+public void setDataConsulta(LocalDateTime dataConsulta) {
+this.dataConsulta = dataConsulta;
+}
+@Override
+public String toString() {
+return codigo + " - " + nomePaciente + " - " +
+especialidade + " - " + dataConsulta +
+" - R$ " + valorConsulta;
+}
+}
+Repositorio.java
+package repository;
+import java.util.ArrayList;
+import java.util.List;
+public class Repositorio<T> {
+private List<T> lista = new ArrayList<>();
+public void adicionar(T obj){
+lista.add(obj);
+}
+public void remover(T obj){
+lista.remove(obj);
+}
+public List<T> listar(){
+return lista;
+}
+}
+Exceções
+package exception;
+public class ConsultaNaoEncontradaException extends Exception {
+public ConsultaNaoEncontradaException(String msg){
+super(msg);
+}
+}
+public class HorarioIndisponivelException extends Exception {
+public HorarioIndisponivelException(String msg){
+super(msg);
+}
+}
+ConsultaService.java
+package service;
+import model.*;
+import repository.Repositorio;
+public class ConsultaService {
+private Repositorio<Consulta> repositorio =
+new Repositorio<>();
+public void cadastrar(Consulta c){
+repositorio.adicionar(c);
+}
+public void remover(Consulta c){
+repositorio.remover(c);
+}
+public java.util.List<Consulta> listar(){
+return repositorio.listar();
+}
+}
+Interfaces Funcionais
+Predicate<Consulta> filtroEspecialidade =
+c -> c.getEspecialidade() == Especialidade.CARDIOLOGIA;
+Predicate<Consulta> filtroValor =
+c -> c.getValorConsulta() > 200;
+Comparator<Consulta> porNome =
+Comparator.comparing(Consulta::getNomePaciente);
+Comparator<Consulta> porData =
+Comparator.comparing(Consulta::getDataConsulta);
+Function<Consulta,String> formatador =
+c -> c.getNomePaciente() + " - " + c.getEspecialidade();
+Consumer<Consulta> exibir =
+c -> System.out.println(c);
+Main.java
+public static void main(String[] args){
+Scanner sc = new Scanner(System.in);
+int opcao;
+do {
+System.out.println("1-Cadastrar");
+System.out.println("2-Remover");
+System.out.println("3-Filtrar Especialidade");
+System.out.println("4-Filtrar Valor");
+System.out.println("5-Reagendar");
+System.out.println("6-Ordenar Data");
+System.out.println("7-Relatorio");
+System.out.println("8-Cancelar");
+System.out.println("9-Exibir");
+System.out.println("0-Sair");
+opcao = sc.nextInt();
+} while(opcao != 0);
+}
+GitHub
+git init
+git add .
+git commit -m "Projeto Clinica Medica"
+git branch -M main
+git remote add origin URL_DO_REPOSITORIO
+git push -u origin mai
