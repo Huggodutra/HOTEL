@@ -1,3 +1,48 @@
+===== CLÍNICA MÉDICA =====
+1 - Cadastrar Consulta
+2 - Listar Consultas
+3 - Buscar Consulta
+4 - Remover Consulta
+0 - Sair
+Escolha: 1
+Código: 12323
+Nome do paciente: hugo
+Especialidade:
+1 - CARDIOLOGIA
+2 - PEDIATRIA
+3 - ORTOPEDIA
+4 - DERMATOLOGIA
+1
+Valor da consulta: 120
+Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+        Syntax error on token(s), misplaced construct(s)
+
+        at model.Consulta.<init>(Consulta.java:1)
+        at Main.main(Main.java:75)
+PS C:\Users\1467033\Documents\Prova>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Projeto Clínica Médica - Guia Detalhado
 Este material apresenta uma implementação educacional completa da estrutura do projeto:
 pacotes, classes, exceções, repositório genérico, menu, interfaces funcionais e Git.
