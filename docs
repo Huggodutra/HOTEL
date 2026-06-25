@@ -140,3 +140,21 @@ git commit -m "Projeto Clinica Medica"
 git branch -M main
 git remote add origin URL_DO_REPOSITORIO
 git push -u origin mai
+
+package exception;
+
+public class ConsultaNaoEncontradaException extends Exception {
+
+    public ConsultaNaoEncontradaException(String mensagem) {
+        super(mensagem);
+    }
+}
+
+package exception;
+
+public class HorarioIndisponivelException extends Exception {
+
+    public HorarioIndisponivelException(String mensagem) {
+        super(mensagem);
+    }
+}
