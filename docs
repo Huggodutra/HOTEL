@@ -391,4 +391,10 @@ public class Repositorio<T> {
 
 
 
+PS C:\Users\1467033\Documents\Prova>  & 'C:\Program Files\Zulu\zulu-25\bin\java.exe' '--enable-preview' '-XX:+ShowCodeDetailsInExceptionMessages' '-cp' 'C:\Users\1467033\AppData\Roaming\Code\User\workspaceStorage\d9d7c5c3a09d8332bbbae4ec67eb06dc\redhat.java\jdt_ws\Prova_d7e564bf\bin' 'Main' 
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+        The method buscarPorCodigo(int) is undefined for the type ConsultaService
+        The method removerPorCodigo(int) is undefined for the type ConsultaService
 
+        at Main.main(Main.java:103)
+PS C:\Users\1467033\Documents\Prova>
